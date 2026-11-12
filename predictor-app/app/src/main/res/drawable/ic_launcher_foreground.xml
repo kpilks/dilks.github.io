@@ -1,0 +1,15 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- ball -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M54,30a24,24 0,1 0,0.01 0z" />
+    <!-- centre pentagon -->
+    <path android:fillColor="#FF1A1A1A"
+        android:pathData="M54,44 L63.5,50.9 L59.9,62.1 L48.1,62.1 L44.5,50.9 Z" />
+    <!-- seams -->
+    <path android:strokeColor="#FF1A1A1A" android:strokeWidth="2"
+        android:pathData="M54,44 L54,31 M63.5,50.9 L75.5,46.5 M59.9,62.1 L67,72.5 M48.1,62.1 L41,72.5 M44.5,50.9 L32.5,46.5" />
+    <path android:fillColor="#FF1A1A1A"
+        android:pathData="M54,30 L59,33.5 L54,36 L49,33.5 Z M77.5,48 L76,54 L72.5,51 L73,45.5 Z M30.5,48 L35,45.5 L35.5,51 L32,54 Z M66,77 L69,71 L72,73 L70.5,76.5 Z M42,77 L37.5,76.5 L36,73 L39,71 Z" />
+</vector>

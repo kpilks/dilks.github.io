@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prediction League</title>
+<meta name="description" content="Pick 10 results every week, bank one for a bonus point, and top the league.">
+<style>
+  :root {
+    --bg: #f6f8f4; --card: #ffffff; --text: #18201a; --muted: #56615a;
+    --primary: #1b6b3a; --on-primary: #ffffff; --accent: #b8860b; --border: #dfe5dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111511; --card: #1d211d; --text: #e3e8e2; --muted: #a7b1a8;
+      --primary: #9ad5a9; --on-primary: #00391a; --accent: #f2c14e; --border: #2c322c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; }
+  header { text-align: center; margin-bottom: 28px; }
+  .ball { font-size: 56px; line-height: 1; }
+  h1 { font-size: 2rem; margin: 8px 0 4px; }
+  .tag { color: var(--muted); margin: 0; }
+  .download { display: block; text-align: center; background: var(--primary); color: var(--on-primary);
+    text-decoration: none; font-weight: 700; font-size: 1.1rem; padding: 16px; border-radius: 14px; margin: 24px 0 8px; }
+  .small { color: var(--muted); font-size: .875rem; text-align: center; margin: 0; }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-top: 16px; }
+  h2 { font-size: 1.15rem; margin: 0 0 10px; }
+  ol, ul { margin: 0; padding-left: 1.3em; }
+  li + li { margin-top: 6px; }
+  .points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; margin-top: 12px; }
+  .points div { border: 1px solid var(--border); border-radius: 12px; padding: 10px 4px; }
+  .points b { display: block; font-size: 1.5rem; color: var(--primary); }
+  .star { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="ball" aria-hidden="true">⚽</div>
+    <h1>Prediction League</h1>
+    <p class="tag">Pick 10 results every week. Bank one for a bonus point. Top the table.</p>
+  </header>
+
+  <a class="download" href="prediction-league.apk" download>Download the app for Android</a>
+  <p class="small">Version 1.0 · about 3 MB · Android 8 or newer</p>
+
+  <section>
+    <h2>How to install</h2>
+    <ol>
+      <li>Tap the download button above on your Android phone.</li>
+      <li>Open the downloaded file. If your phone asks, allow your browser to <em>install unknown apps</em>. That's needed for apps that don't come from the Play Store.</li>
+      <li>Open <strong>Prediction League</strong>, tap <strong>Register</strong>, and choose your team name. That's the name everyone sees in the league table.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>How to play</h2>
+    <ul>
+      <li>Each week there are 10 matches. Pick <strong>Home</strong>, <strong>Draw</strong> or <strong>Away</strong> for each one.</li>
+      <li>Tap the <span class="star">★</span> on one match to make it your <strong>banker</strong>. Get it right and you score double.</li>
+      <li>You can change your picks as often as you like until the deadline, which is normally the first kick-off.</li>
+      <li>Results are the 90-minute score. A match that goes to extra time or penalties counts as a draw.</li>
+      <li>Scores update live during matches, and the league table updates with them.</li>
+    </ul>
+    <div class="points">
+      <div><b>1</b>point per correct result</div>
+      <div><b>+1</b>if your banker is right</div>
+      <div><b>11</b>maximum per week</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>iPhone?</h2>
+    <p style="margin:0">The app is Android only for now. Ask the organiser to add you to the league. You send them your picks each week and they enter them for you, so you still appear in the table.</p>
+  </section>
+</main>
+</body>
+</html>
