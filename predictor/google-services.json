@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "165482275193",
+    "project_id": "prediction-d4017",
+    "storage_bucket": "prediction-d4017.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165482275193:android:74af52978420012b49cfa8",
+        "android_client_info": {
+          "package_name": "uk.co.ccooper.predictor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM5w_dFfDx9TlvGSiN9pMzBw16kSW1Qus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
