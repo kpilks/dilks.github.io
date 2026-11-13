@@ -19,10 +19,10 @@ android {
 
     defaultConfig {
         applicationId = "uk.co.ccooper.predictor"
-        minSdk = 26
+        minSdk = 24 // Android 7.0
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
         // Where the app downloads its Firebase settings from on first launch.
         buildConfigField("String", "CONFIG_URL", "\"https://ccooper.co.uk/predictor/google-services.json\"")
         buildConfigField("String", "SHARE_URL", "\"https://ccooper.co.uk/predictor/\"")
@@ -56,6 +56,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true // java.time on Android 7
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -82,6 +83,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.9.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.json:json:20240303") // real org.json for JVM tests (Android's is a stub)
