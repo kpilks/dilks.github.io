@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// Security rules for the Prediction League app.
+// Paste this into Firebase console → Firestore Database → Rules, then Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function adminsPath() { return /databases/$(database)/documents/meta/admins; }
+    function isAdmin() {
+      return signedIn() && exists(adminsPath())
+        && request.auth.uid in get(adminsPath()).data.uids;
+    }
+    function validTeamName(n) { return n is string && n.size() >= 2 && n.size() <= 30; }
+    function ownsTeamName(n, uid) {
+      return getAfter(/databases/$(database)/documents/teamNames/$(n.trim().lower())).data.uid == uid;
+    }
+
+    // List of admin user ids. The first person to register claims it.
+    match /meta/admins {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.uids == [request.auth.uid];
+      allow update: if isAdmin() && request.resource.data.uids.size() > 0;
+    }
+
+    // Reserves team names so they're unique.
+    match /teamNames/{key} {
+      allow get: if true;           // lets sign-up check a name is free
+      allow list: if signedIn();
+      allow create: if signedIn() && key == key.lower()
+        && (request.resource.data.uid == request.auth.uid || isAdmin());
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // Player profiles. Players can only change their own name/team name; points are admin-only.
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create: if isAdmin()  // admins can add players who don't have the app
+        || (signedIn() && request.auth.uid == uid
+        && request.resource.data.get('manual', false) == false
+        && validTeamName(request.resource.data.teamName)
+        && request.resource.data.weekPoints == {}
+        && ownsTeamName(request.resource.data.teamName, uid));
+      allow update: if isAdmin()
+        || (signedIn() && request.auth.uid == uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['teamName', 'name'])
+            && validTeamName(request.resource.data.teamName)
+            && ownsTeamName(request.resource.data.teamName, uid));
+      allow delete: if isAdmin();
+    }
+
+    match /weeks/{weekId} {
+      function wk() { return get(/databases/$(database)/documents/weeks/$(weekId)).data; }
+
+      allow read: if signedIn();
+      allow write: if isAdmin();
+
+      // Picks: your own until the deadline; everyone's become visible once it passes.
+      match /picks/{uid} {
+        allow read: if signedIn()
+          && (request.auth.uid == uid || isAdmin() || request.time >= wk().deadline);
+        allow create, update: if isAdmin()
+          || (signedIn() && request.auth.uid == uid
+              && wk().status == 'open'
+              && request.time < wk().deadline
+              && request.resource.data.uid == uid
+              && request.resource.data.picks is map
+              && request.resource.data.picks.size() <= 20
+              && request.resource.data.keys().hasOnly(['uid', 'picks', 'banker', 'updatedAt']));
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}
